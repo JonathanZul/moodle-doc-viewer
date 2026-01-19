@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moodle Docs Viewer - Settings</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Moodle Docs Viewer Settings</h1>
+
+    <section class="setting-group">
+      <h2>Moodle Domains</h2>
+      <p class="description">Add the Moodle domains where you want the extension to work. Use patterns like <code>*.moodle.university.edu</code> or <code>moodle.school.org</code>.</p>
+
+      <div class="domain-input-group">
+        <input type="text" id="new-domain" placeholder="e.g., moodle.myschool.edu">
+        <button id="add-domain" class="btn btn-primary">Add Domain</button>
+      </div>
+
+      <ul id="domain-list" class="domain-list"></ul>
+    </section>
+
+    <section class="setting-group">
+      <h2>File Types</h2>
+      <p class="description">Select which document types should open in the viewer.</p>
+
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="type-docx" checked>
+          <span>Word Documents (.docx, .doc)</span>
+        </label>
+        <label>
+          <input type="checkbox" id="type-pptx" checked>
+          <span>PowerPoint (.pptx, .ppt)</span>
+        </label>
+        <label>
+          <input type="checkbox" id="type-xlsx" checked>
+          <span>Excel (.xlsx, .xls)</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="setting-group">
+      <h2>Viewer</h2>
+      <p class="description">Choose which online viewer to use for documents.</p>
+
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="viewer" value="google" checked>
+          <span>Google Docs Viewer</span>
+        </label>
+        <label>
+          <input type="radio" name="viewer" value="office">
+          <span>Microsoft Office Online</span>
+        </label>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button id="save-settings" class="btn btn-primary">Save Settings</button>
+      <button id="reset-defaults" class="btn btn-secondary">Reset to Defaults</button>
+    </div>
+
+    <div id="status-message" class="status-message" hidden></div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
