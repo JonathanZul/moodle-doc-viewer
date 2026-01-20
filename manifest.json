@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Moodle Docs Viewer",
-  "description": "Open Word documents in your browser instead of downloading them on Moodle",
-  "version": "1.0.0",
+  "description": "View Word documents directly in your browser on Moodle without downloading",
+  "version": "2.0.0",
   "author": "Jonathan Zulluna",
   "browser_specific_settings": {
     "gecko": {
@@ -18,8 +18,7 @@
     "storage"
   ],
   "host_permissions": [
-    "*://*.moodle.*/*",
-    "*://moodle.*/*"
+    "<all_urls>"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -31,9 +30,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.moodle.*/*", "*://moodle.*/*"],
+      "matches": ["<all_urls>"],
       "js": ["content.js"],
       "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["viewer.html", "viewer.js", "viewer.css", "lib/*"],
+      "matches": ["<all_urls>"]
     }
   ]
 }

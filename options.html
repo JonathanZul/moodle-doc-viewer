@@ -11,50 +11,49 @@
     <h1>Moodle Docs Viewer Settings</h1>
 
     <section class="setting-group">
-      <h2>Moodle Domains</h2>
-      <p class="description">Add the Moodle domains where you want the extension to work. Use patterns like <code>*.moodle.university.edu</code> or <code>moodle.school.org</code>.</p>
-
-      <div class="domain-input-group">
-        <input type="text" id="new-domain" placeholder="e.g., moodle.myschool.edu">
-        <button id="add-domain" class="btn btn-primary">Add Domain</button>
-      </div>
-
-      <ul id="domain-list" class="domain-list"></ul>
+      <h2>About</h2>
+      <p class="description">
+        This extension allows you to view Word documents (.docx) directly in your browser
+        when browsing Moodle or other websites. Documents are rendered locally in your browser
+        without needing to download them first.
+      </p>
     </section>
 
     <section class="setting-group">
-      <h2>File Types</h2>
-      <p class="description">Select which document types should open in the viewer.</p>
+      <h2>File Size Limit</h2>
+      <p class="description">Maximum file size to preview (in MB). Larger files will prompt for download instead.</p>
 
-      <div class="checkbox-group">
-        <label>
-          <input type="checkbox" id="type-docx" checked>
-          <span>Word Documents (.docx, .doc)</span>
-        </label>
-        <label>
-          <input type="checkbox" id="type-pptx" checked>
-          <span>PowerPoint (.pptx, .ppt)</span>
-        </label>
-        <label>
-          <input type="checkbox" id="type-xlsx" checked>
-          <span>Excel (.xlsx, .xls)</span>
-        </label>
+      <div class="input-group">
+        <input type="number" id="max-file-size" min="1" max="50" value="20">
+        <span class="input-suffix">MB</span>
       </div>
     </section>
 
     <section class="setting-group">
-      <h2>Viewer</h2>
-      <p class="description">Choose which online viewer to use for documents.</p>
+      <h2>Supported File Types</h2>
+      <p class="description">Currently supported file types for in-browser viewing.</p>
 
-      <div class="radio-group">
-        <label>
-          <input type="radio" name="viewer" value="google" checked>
-          <span>Google Docs Viewer</span>
-        </label>
-        <label>
-          <input type="radio" name="viewer" value="office">
-          <span>Microsoft Office Online</span>
-        </label>
+      <div class="file-types-info">
+        <div class="file-type supported">
+          <span class="file-icon">W</span>
+          <span class="file-name">Word Documents (.docx)</span>
+          <span class="file-status">Supported</span>
+        </div>
+        <div class="file-type coming-soon">
+          <span class="file-icon">W</span>
+          <span class="file-name">Legacy Word (.doc)</span>
+          <span class="file-status">Coming soon</span>
+        </div>
+        <div class="file-type coming-soon">
+          <span class="file-icon">P</span>
+          <span class="file-name">PowerPoint (.pptx)</span>
+          <span class="file-status">Coming soon</span>
+        </div>
+        <div class="file-type coming-soon">
+          <span class="file-icon">X</span>
+          <span class="file-name">Excel (.xlsx)</span>
+          <span class="file-status">Coming soon</span>
+        </div>
       </div>
     </section>
 
@@ -64,6 +63,22 @@
     </div>
 
     <div id="status-message" class="status-message" hidden></div>
+
+    <section class="setting-group info-section">
+      <h2>How It Works</h2>
+      <p class="description">
+        When you click on a .docx link, this extension:
+      </p>
+      <ol class="how-it-works-list">
+        <li>Downloads the file using your browser's session (preserving authentication)</li>
+        <li>Opens a new tab with the built-in document viewer</li>
+        <li>Renders the document directly in your browser</li>
+      </ol>
+      <p class="description">
+        This means you can view documents from authenticated sources like Moodle
+        without having to download them to your computer first.
+      </p>
+    </section>
   </div>
 
   <script src="options.js"></script>
