@@ -50,10 +50,45 @@ body {
   text-overflow: ellipsis;
 }
 
+.toolbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .toolbar-right {
   display: flex;
   gap: 8px;
   flex-shrink: 0;
+}
+
+/* Zoom controls */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.zoom-btn {
+  padding: 6px 8px;
+  border: none;
+  background: transparent;
+}
+
+.zoom-btn:hover {
+  background: #e0e0e0;
+}
+
+.zoom-level {
+  min-width: 50px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  padding: 0 4px;
 }
 
 .toolbar-btn {
@@ -91,10 +126,11 @@ body {
 /* Document wrapper */
 .document-wrapper {
   flex: 1;
-  padding: 20px;
+  padding: 20px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
 }
 
 /* Loading indicator */
@@ -197,18 +233,22 @@ body {
   background: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 1200px;
   overflow: auto;
+  transform-origin: top center;
+  transition: transform 0.2s ease;
 }
 
 /* docx-preview styles */
 .docx-viewer {
-  padding: 20px;
+  padding: 40px 60px;
 }
 
 .docx-viewer section.docx {
   margin-bottom: 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
 }
 
 /* Print styles */

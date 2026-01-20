@@ -8,9 +8,19 @@ const downloadBtn = document.getElementById('download-btn');
 const printBtn = document.getElementById('print-btn');
 const downloadFallbackBtn = document.getElementById('download-fallback-btn');
 const closeBtn = document.getElementById('close-btn');
+const zoomInBtn = document.getElementById('zoom-in-btn');
+const zoomOutBtn = document.getElementById('zoom-out-btn');
+const zoomResetBtn = document.getElementById('zoom-reset-btn');
+const zoomLevelDisplay = document.getElementById('zoom-level');
 
 // Store document info for download
 let currentDocument = null;
+
+// Zoom state
+let currentZoom = 100;
+const ZOOM_STEP = 25;
+const MIN_ZOOM = 50;
+const MAX_ZOOM = 200;
 
 /**
  * Shows the loading indicator
@@ -65,6 +75,49 @@ function downloadOriginalFile() {
  */
 function printDocument() {
   window.print();
+}
+
+/**
+ * Updates the zoom level display and applies zoom
+ */
+function updateZoom() {
+  zoomLevelDisplay.textContent = `${currentZoom}%`;
+  documentContainer.style.transform = `scale(${currentZoom / 100})`;
+
+  // Adjust container width to prevent horizontal scrollbar issues
+  if (currentZoom > 100) {
+    documentContainer.style.width = `${100 / (currentZoom / 100)}%`;
+  } else {
+    documentContainer.style.width = '100%';
+  }
+}
+
+/**
+ * Zooms in the document
+ */
+function zoomIn() {
+  if (currentZoom < MAX_ZOOM) {
+    currentZoom = Math.min(currentZoom + ZOOM_STEP, MAX_ZOOM);
+    updateZoom();
+  }
+}
+
+/**
+ * Zooms out the document
+ */
+function zoomOut() {
+  if (currentZoom > MIN_ZOOM) {
+    currentZoom = Math.max(currentZoom - ZOOM_STEP, MIN_ZOOM);
+    updateZoom();
+  }
+}
+
+/**
+ * Resets zoom to 100%
+ */
+function resetZoom() {
+  currentZoom = 100;
+  updateZoom();
 }
 
 /**
@@ -140,6 +193,9 @@ async function loadDocument() {
 // Event listeners
 downloadBtn.addEventListener('click', downloadOriginalFile);
 printBtn.addEventListener('click', printDocument);
+zoomInBtn.addEventListener('click', zoomIn);
+zoomOutBtn.addEventListener('click', zoomOut);
+zoomResetBtn.addEventListener('click', resetZoom);
 downloadFallbackBtn.addEventListener('click', () => {
   if (currentDocument && currentDocument.url) {
     window.open(currentDocument.url, '_blank');
@@ -164,6 +220,21 @@ document.addEventListener('keydown', (e) => {
     if (!downloadBtn.disabled) {
       downloadOriginalFile();
     }
+  }
+  // Ctrl/Cmd + Plus for zoom in
+  if ((e.ctrlKey || e.metaKey) && (e.key === '=' || e.key === '+')) {
+    e.preventDefault();
+    zoomIn();
+  }
+  // Ctrl/Cmd + Minus for zoom out
+  if ((e.ctrlKey || e.metaKey) && e.key === '-') {
+    e.preventDefault();
+    zoomOut();
+  }
+  // Ctrl/Cmd + 0 for reset zoom
+  if ((e.ctrlKey || e.metaKey) && e.key === '0') {
+    e.preventDefault();
+    resetZoom();
   }
   // Escape to close
   if (e.key === 'Escape') {
